@@ -1,0 +1,35 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	justify-content: center;
+  	font-family: "Nerko One", cursive;
+  	font-weight: bold;
+}
+
+body{
+	background-color: black;
+}
+
+.header-container{
+	align-items: center;
+	background-color: red;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.header-text-name{
+	font-size: 35px;
+	color: white;
+}
+
+video{
+	border: 2px solid white;
+	margin-top: 20px;
+}
+
+.copyright-text{
+	color: white;
+	font-size: 18px;
+	margin-top: 200px;
+}
