@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>撸撸69 | 购物车列表</title>
+  <link rel="shortcut icon" href="Element/logo.png">
+  <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <script src="https://kit.fontawesome.com/e3ce135c28.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header" id="header">
+            <!-- 头部内容将根据用户登录状态动态插入 -->
+    </header>
+
+    <div class="cart-container">
+        <!-- 购物车列表 -->
+        <div id="cartItems" class="cart-items">
+            <!-- 产品列表会动态加载 -->
+        </div>
+    </div>
+    
+    <!-- 计算和结账 -->
+    <div class="cart-footer">
+        <div class="cart-footer-checkout">
+            <input type="checkbox" id="selectAllCheckbox">
+            <p>全选</p>
+        </div>
+        <div class="cart-footer-checkout">
+            <div id="totalPrice" class="total-price">总价：RM 0.00</div>
+            <button id="checkoutButton" class="checkout-button">结账 (0)</button>
+        </div>
+    </div>    
+    
+  <script src="Cart-List.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>撸撸69 | 登入或注册</title>
+  <link rel="shortcut icon" href="Element/logo.png">
+  <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="login-Full-Wrapper">
+
+        <div class="loginContainer-wrapper">
+          <!-- 登录表单 -->
+          <div id="loginForm" class="loginFormContainer">
+            <input type="text" id="loginWaNumber" placeholder="手机号码" required>
+            <input type="password" id="loginPassword" placeholder="密码" required>
+            <button onclick="submitLogin()" class="loginSubmitBtn">登入账号</button>
+            <div class="login-form-buttom">
+              <p id="loginMessage" class="loginErrorMessage"></p>
+              <p class="loginShowText">还没有账号 ？<button onclick="showRegisterForm()" class="loginShowBtn">注册</button></p>
+              <p class="loginShowText loginForget">忘记密码 ？<a href="https://t.me/sweett520?text=重置密码" class="loginShowBtn">点这里</a></p>
+            </div>
+          </div>                  
+
+          <!-- 注册表单 -->
+          <div id="registerForm" class="loginFormContainer" style="display: none;">
+            <input type="text" id="registerFullName" placeholder="姓名" required>
+            <input type="number" id="registerWaNumber" placeholder="手机号码" required>
+            <input type="password" id="registerPassword" placeholder="密码" required>
+            <button onclick="submitRegister()" class="loginSubmitBtn">注册账号</button>
+            <div class="login-form-buttom">
+              <p id="registerMessage" class="loginErrorMessage"></p>
+              <p class="loginShowText">已经拥有账号 ？<button onclick="showLoginForm()" class="loginShowBtn">登入</button></p>
+            </div>
+          </div>
+        </div>
+
+</div>
+
+  <script src="login.js"></script>
+
+</body>
+</html>

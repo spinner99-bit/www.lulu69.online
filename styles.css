@@ -1,0 +1,562 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-weight: 900;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background-color: black;
+    margin-bottom: 100px;
+}
+
+.login-Full-Wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: url(Element/Background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    overflow: hidden;
+}
+
+.loginContainer-wrapper{
+    display: grid;
+    text-align: center;
+    margin: 20px 0;
+    max-width: 500px;
+}
+
+@media (max-width: 768px) {
+    .loginContainer-wrapper{
+        max-width: 350px;
+    }
+}
+
+.loginFormContainer h2{
+    margin: 20px 0;
+    font-size: 28px;
+}
+
+.loginFormContainer input,
+.loginSubmitBtn{
+    border-radius: 20px;
+    width: 100%;
+}
+
+.loginFormContainer input{
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+    background: rgba(240, 240, 240, 0.3);
+    border: 2px solid black;
+}
+
+.loginFormContainer input::placeholder{
+    color: rgb(87, 87, 87);
+}
+
+.loginSubmitBtn{
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    color: white;
+    background: rgba(255, 0, 0, 0.486);
+    border: 2px solid white;
+}
+
+.login-form-buttom{
+    margin: 10px;
+    padding: 10px;
+}
+
+.loginErrorMessage{
+    color: red;
+}
+
+.loginShowText{
+    font-size: 16px;
+}
+
+.loginShowBtn{
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    color: red;
+    border-bottom: 2px solid red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loginForget{
+    margin-top: 10px;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  height: 50px;
+  background-color: red;
+  color: white;
+  align-items: center;
+  align-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-userInfo{
+    display: flex;
+    align-items: center;
+}
+
+.plsLogin-button{
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: yellow;
+}
+
+.welcome-message{
+    font-size: 16px;
+    font-weight: 900;
+    align-self: center;
+    margin-left: 5px;
+}
+
+.header-balance{
+    display: flex;
+    align-items: center;
+}
+
+.header-balance .fa-coins,
+.header-balance .fa-user{
+    font-size: 20px;
+    color: white;
+}
+
+.fa-arrow-left{
+    font-weight: 900;
+    font-size: 24px;
+}
+
+header span{
+    font-weight: 900;
+    font-size: medium;
+}
+
+.header-balance .bx-loader-circle{
+    margin-left: 5px;
+    -webkit-animation: spin 1.5s linear infinite;
+	-moz-animation: spin 1.5s linear infinite;
+	animation: spin 1.5s linear infinite;
+}
+
+@media (max-width: 768px) {
+    .welcome-message{
+        font-size: 14px;
+    }
+}
+
+/* Container for the bottom navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: space-around;
+}
+
+ /* Styling each navigation item */
+.bottom-nav a {
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    flex: 1;
+    padding: 5px 0;
+}
+
+.menuPage-normal{
+    color: white;
+}
+
+.menuPage-setYellow{
+    background-color: yellow;
+    color: black;
+}
+
+.bottom-nav a .icon {
+    font-size: 26px;
+    display: block;
+}
+
+.changePass-Wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.changePass-cover {
+    flex: 1; /* 让内容区域占据剩余空间 */
+}
+
+.changePass-cover h2{
+    color: white;
+    margin-bottom: 10px;
+}
+
+.changePass-cover input,
+.changePass-cover button{
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.changePass-cover input{
+    margin: 5px 0;
+    text-align: center;
+    border: 1px solid red;
+}
+
+.changePass-wanumber{
+    color: rgb(155, 155, 155);
+}
+
+.changePass-edit-button{
+    width: 100%;
+    margin-top: 15px;
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+}
+
+.changePass-edit-button:hover{
+    background-color: transparent;
+    color: red;
+}
+
+.changePass-logout-button{
+    align-self: center;
+    border-radius: 10px;
+    margin-top: auto;
+    margin-bottom: 200px;
+    padding: 10px;
+    width: 220px;
+    color: white;
+    background-color: transparent;
+    border: 2px solid red;
+}
+
+.changePass-logout-button:hover{
+    background-color: red;
+    color: white;
+}
+
+.reloadPoints-wrapper {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+}
+
+.reloadPoints-per-item{
+    display: grid;
+    width: 23%;
+    text-decoration: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.reloadPoints-per-top{
+    border: 2px solid red;
+    padding: 10px;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    height: 175px;
+}
+
+.reloadPoints-per-item img{
+    height: 100px;
+    width: auto;
+}
+
+.reloadPoints-points{
+    color: yellow;
+}
+
+.reloadPoints-FreePoints{
+    font-size: 12px;
+}
+
+.reloadPoints-per-item button{
+    padding: 5px 0;
+    border: 2px solid red;
+    border-top: none;
+    background: linear-gradient(#aa0808,red);
+    color: white;
+    font-weight: 900;
+}
+
+@media (max-width: 425px) {
+    .reloadPoints-per-item{
+        width: 47%;
+    }
+}
+
+#productLoading{
+    width: 100%;
+    font-size: 250px;
+    text-align: center;
+    color: red;
+}
+
+#productLoading .bx-loader-circle{
+    -webkit-animation: spin 1.5s linear infinite;
+	-moz-animation: spin 1.5s linear infinite;
+	animation: spin 1.5s linear infinite;
+}
+
+.home-product-select{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: white;
+}
+
+.home-product-select select{
+    text-align: center;
+    border: none;
+    font-weight: 900;
+    background-color: transparent;
+    color: red;
+}
+
+.home-product-wrapper{
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.home-product-wrapper #productContainer,
+.home-product-wrapper #productCards {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.home-product-wrapper .product-card {
+    background: white;
+    border-radius: 8px;
+    width: 23%;
+    margin: 5px;
+    text-align: center;
+    overflow: hidden;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column; /* 内容垂直堆叠 */
+}
+
+.home-product-wrapper .product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.home-product-wrapper .product-info {
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid red;
+}
+
+.home-product-wrapper .name-category {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.home-product-wrapper .price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.home-productName{
+    font-size: medium;
+    text-align: left;
+}
+
+.home-productCategory{
+    font-size: smaller;
+    text-align: right;
+}
+
+.home-productPrice{
+    font-size: medium;
+    color: red;
+    text-align: left;
+}
+
+.home-productAddCart{
+    font-size: 20px; /* 适当调整图标大小 */
+    cursor: pointer;
+}
+
+.open-productLink{
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.open-productLink button{
+    font-size: smaller;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .home-product-wrapper .product-card{
+        width: 47%;
+    }
+}
+
+.cart-container {
+    width: 100%; /* Ensure the container takes 80% width */
+    max-width: 1200px; /* Optional: set a max-width for large screens */
+    display: flex;
+    justify-content: center;
+}
+
+.cart-items {
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid red;
+    color: white;
+}
+
+.product-checkbox,
+#selectAllCheckbox {
+    transform: scale(1.5);
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.cart-item .details {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item .details .product-name {
+    margin-right: 10px;
+}
+
+.cart-item .details .product-price {
+    color: red;
+}
+
+.cart-item .actions {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item .actions i {
+    cursor: pointer;
+    font-size: 18px;
+    color: #e74c3c;
+}
+
+.ifCartBlank{
+    color: red;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.cart-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.cart-footer-checkout{
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.cart-footer-checkout p{
+    margin-left: 10px;
+    font-weight: 900;
+}
+
+#totalPrice {
+    font-size: 16px;
+    font-weight: 900;
+    color: white;
+    margin-right: 20px;
+}
+
+.checkout-button {
+    padding: 10px 50px;
+    background-color: yellow;
+    color: black;
+    font-weight: 900;
+    font-size: larger;
+    border: none;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
+    background-color: #acae27;
+}
+
+@media (max-width: 425px) {
+    .checkout-button {
+        padding: 10px 30px;
+    }
+}
