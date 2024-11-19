@@ -136,7 +136,7 @@ function updateCartCount() {
 }
 
 const categoryDataUrl = 'https://script.google.com/macros/s/AKfycbz0RhbfORVEizH4uRROHAWVZNJirHagYi8nTlN36kMdbCsmoLObGqAcS2ze6NVeu5gWZg/exec';
-const productDataUrl = 'https://script.google.com/macros/s/AKfycbwSfik_ANhvIY9DcEB61sMO66xYSnD9aZhtj4xVigMIzqZGdW44OtgGBSu6sTrYqBmbNw/exec?type=getActiveProduct';
+const productDataUrl = 'https://script.google.com/macros/s/AKfycbxsn1h4FwzwG0ES5gZAOtlN5BAzhTyQwilTcghPE_y7uSjSaF7zvlgu7XIR-6uDwaOdHQ/exec?type=getActiveProduct';
 const purchaseLogUrl = 'https://script.google.com/macros/s/AKfycbwczl3ir64QEATYVdkUFdx4QLAPDpOPlD8kcGWjmRfI_ffVwYUWdIoS7kT7JDCw2B7A/exec'; // 替换为实际部署的 URL
 
 // Global variables to store categories and products
@@ -291,7 +291,7 @@ async function displayProducts(products) {
             productContainer.innerHTML = '<p>No products found.</p>';
         } else {
             products.forEach(product => {
-                const [name, category, price, link, image, status, date] = product;
+                const [name, category, price, image, status, date] = product;
 
                 const productCard = document.createElement('div');
                 productCard.classList.add('product-card');
@@ -338,9 +338,10 @@ async function displayProducts(products) {
                     addToCartIcon.classList.remove('fa-cart-plus');
                     addToCartIcon.classList.add('fa-file-circle-check');
                     addToCartIcon.style.color = 'green'; // 设置颜色为红色
+                    addToCartIcon.style.pointerEvents = 'none'; // 禁用点击
                 
                     // 启用点击事件
-                    addToCartIcon.style.pointerEvents = 'auto'; // 启用点击事件
+                    // addToCartIcon.style.pointerEvents = 'auto'; // 启用点击事件
                 
                     // 添加点击事件跳转到 pla.html
                     addToCartIcon.addEventListener('click', () => {
