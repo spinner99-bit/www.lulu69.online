@@ -133,7 +133,7 @@ function displayCart() {
 
     // 如果购物车为空，显示提示
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="ifCartBlank">购物车中没有产品</p>';
+        cartItemsContainer.innerHTML = '<p class="ifCartBlank">购物车中没有物品</p>';
         totalPriceElement.innerHTML = '总价：<i class="fa-solid fa-coins"></i> 0';
         checkoutButton.textContent = '结账 (0)';
         return;
