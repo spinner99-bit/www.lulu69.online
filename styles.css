@@ -7,8 +7,18 @@
 }
 
 body{
-    background-color: black;
+    background-color: #f0f0f0;
     margin-bottom: 100px;
+}
+
+body::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #c7c7c7;
+    border-radius: 0;
 }
 
 .login-Full-Wrapper{
@@ -192,8 +202,8 @@ header span{
 }
 
 .menuPage-setYellow{
-    background-color: yellow;
-    color: black;
+    background-color: white;
+    color: red;
 }
 
 .bottom-nav a .icon {
@@ -216,7 +226,7 @@ header span{
 }
 
 .changePass-cover h2{
-    color: white;
+    color: black;
     margin-bottom: 10px;
 }
 
@@ -242,6 +252,7 @@ header span{
     background-color: red;
     color: white;
     border: 1px solid red;
+    cursor: pointer;
 }
 
 .changePass-edit-button:hover{
@@ -256,9 +267,10 @@ header span{
     margin-bottom: 200px;
     padding: 10px;
     width: 220px;
-    color: white;
+    color: red;
     background-color: transparent;
     border: 2px solid red;
+    cursor: pointer;
 }
 
 .changePass-logout-button:hover{
@@ -280,6 +292,8 @@ header span{
     text-decoration: none;
     margin: 5px;
     cursor: pointer;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .reloadPoints-per-top{
@@ -299,11 +313,12 @@ header span{
 }
 
 .reloadPoints-points{
-    color: yellow;
+    color: red;
 }
 
 .reloadPoints-FreePoints{
     font-size: 12px;
+    color: black;
 }
 
 .reloadPoints-per-item button{
@@ -338,15 +353,19 @@ header span{
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    color: white;
+    align-items: center;
+    background-color: white;
+    padding: 10px 0;
 }
 
 .home-product-select select{
     text-align: center;
-    border: none;
+    border: 1PX solid red;
+    padding: 5px;
     font-weight: 900;
     background-color: transparent;
     color: red;
+    font-size: medium;
 }
 
 .home-product-wrapper{
@@ -366,35 +385,49 @@ header span{
 
 .home-product-wrapper .product-card {
     background: white;
-    border-radius: 8px;
     width: 23%;
     margin: 5px;
     text-align: center;
     overflow: hidden;
-    border: 2px solid red;
     display: flex;
-    flex-direction: column; /* 内容垂直堆叠 */
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-wrapper{
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .home-product-wrapper .product-card img {
     width: 100%;
     height: auto;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card img:hover{
+    transform: scale(1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .home-product-wrapper .product-info {
-    padding: 5px 10px;
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top: 2px solid red;
 }
 
 .home-product-wrapper .name-category {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     align-items: center;
 }
 
@@ -413,6 +446,11 @@ header span{
 .home-productCategory{
     font-size: smaller;
     text-align: right;
+    background-color: red;
+    color: white;
+    font-weight: 900;
+    padding: 7px 10px;
+    border-radius: 50%;
 }
 
 .home-productPrice{
@@ -438,7 +476,7 @@ header span{
     padding: 3px 10px;
     border-radius: 5px;
     border: none;
-    background-color: red;
+    background-color: green;
     color: white;
     cursor: pointer;
 }
@@ -466,8 +504,7 @@ header span{
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid red;
-    color: white;
+    border-bottom: 2px solid red;
 }
 
 .product-checkbox,
@@ -479,6 +516,7 @@ header span{
     width: 60px;
     height: 60px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .cart-item .details {
@@ -488,6 +526,7 @@ header span{
 
 .cart-item .details .product-name {
     margin-right: 10px;
+    color: black;
 }
 
 .cart-item .details .product-price {
@@ -501,8 +540,8 @@ header span{
 
 .cart-item .actions i {
     cursor: pointer;
-    font-size: 18px;
-    color: #e74c3c;
+    font-size: 22px;
+    color: red;
 }
 
 .ifCartBlank{
