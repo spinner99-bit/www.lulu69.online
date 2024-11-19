@@ -135,9 +135,9 @@ function updateCartCount() {
     countCartElement.textContent = `购物车 (${cartCount})`;
 }
 
-const categoryDataUrl = 'https://script.google.com/macros/s/AKfycbz0RhbfORVEizH4uRROHAWVZNJirHagYi8nTlN36kMdbCsmoLObGqAcS2ze6NVeu5gWZg/exec';
-const productDataUrl = 'https://script.google.com/macros/s/AKfycbxsn1h4FwzwG0ES5gZAOtlN5BAzhTyQwilTcghPE_y7uSjSaF7zvlgu7XIR-6uDwaOdHQ/exec?type=getActiveProduct';
-const purchaseLogUrl = 'https://script.google.com/macros/s/AKfycbwczl3ir64QEATYVdkUFdx4QLAPDpOPlD8kcGWjmRfI_ffVwYUWdIoS7kT7JDCw2B7A/exec'; // 替换为实际部署的 URL
+const categoryDataUrl = 'https://script.google.com/macros/s/AKfycbwX_6CEh5ag-oWEfKKuxs534ZscyVtti5-9vE-kEBRIiLEAfC1M6wdT6C-NKx7XgYtM/exec?action=getWebCategory';
+const productDataUrl = 'https://script.google.com/macros/s/AKfycbxmpdxpdavl3-l8yIs44lH-1meoJJyNMcLBOjwXLdH2uaLgwm4w2Ub9Isz54gMzeorP/exec?action=getWebProducts';
+const purchaseLogUrl = 'https://script.google.com/macros/s/AKfycbx7UJW9iZGwLvghAIGvguZk2ZlUDSNssv-0pBibk7fappjtgZrI_mwLCGcMg7Gp7lnH/exec'; // 替换为实际部署的 URL
 
 // Global variables to store categories and products
 let categories = [];
