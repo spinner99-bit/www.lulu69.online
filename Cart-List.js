@@ -141,7 +141,7 @@ function displayCart() {
 
     // 遍历购物车中的每个产品
     cart.forEach(product => {
-        const [name, category, price, link, image, status, date] = product;
+        const [name, category, price, image, status, date] = product;
 
         // 创建购物车项
         const cartItem = document.createElement('div');
