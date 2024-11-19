@@ -189,6 +189,10 @@ function displayProducts(products) {
       // 为图片绑定点击事件，弹出大图
       img.addEventListener('click', () => showPopup(image));
 
+      const imageWrapper = document.createElement('div');
+      imageWrapper.classList.add('image-wrapper');
+      imageWrapper.appendChild(img);
+
       // 创建信息容器
       const info = document.createElement("div");
       info.classList.add("product-info");
@@ -223,7 +227,7 @@ function displayProducts(products) {
       // 组合卡片内容
       info.appendChild(nameCategory);  // 添加名称和类别容器
       info.appendChild(openProductLink);  // 添加按钮容器
-      card.appendChild(img);  // 添加图片
+      card.appendChild(imageWrapper);  // 添加图片
       card.appendChild(info);  // 添加产品信息
 
       // 添加卡片到页面
