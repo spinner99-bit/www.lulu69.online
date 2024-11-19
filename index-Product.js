@@ -304,6 +304,10 @@ async function displayProducts(products) {
                 // 为图片绑定点击事件，弹出大图
                 img.addEventListener('click', () => showPopup(image));
 
+                const imageWrapper = document.createElement('div');
+                imageWrapper.classList.add('image-wrapper');
+                imageWrapper.appendChild(img);
+
                 const nameCategoryDiv = document.createElement('div');
                 nameCategoryDiv.classList.add('name-category');
 
@@ -351,7 +355,7 @@ async function displayProducts(products) {
                 } else if (isInCart) {
                     // 如果已添加到购物车，显示 'fa-square-check'
                     addToCartIcon.classList.add('fa-cart-plus');
-                    addToCartIcon.style.color = '#20a520'; // 设置颜色为绿色
+                    addToCartIcon.style.color = '#fbbc04'; // 设置颜色为绿色
                 }
 
                 addToCartIcon.addEventListener('click', () => toggleCart(addToCartIcon, product));
@@ -368,7 +372,7 @@ async function displayProducts(products) {
                 productInfo.appendChild(nameCategoryDiv);  // 添加名称和分类容器
                 productInfo.appendChild(priceCartDiv);    // 添加价格和购物车容器
 
-                productCard.appendChild(img);
+                productCard.appendChild(imageWrapper); // 添加 imageWrapper 到 productCard
                 productCard.appendChild(productInfo);
 
                 // 将产品卡片添加到容器
