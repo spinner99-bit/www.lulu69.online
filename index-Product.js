@@ -336,8 +336,8 @@ async function displayProducts(products) {
                 if (isPurchased) {
                     // 如果已购买，显示 'fa-folder-open' 并启用点击事件
                     addToCartIcon.classList.remove('fa-cart-plus');
-                    addToCartIcon.classList.add('fa-folder-open');
-                    addToCartIcon.style.color = 'red'; // 设置颜色为红色
+                    addToCartIcon.classList.add('fa-file-circle-check');
+                    addToCartIcon.style.color = 'green'; // 设置颜色为红色
                 
                     // 启用点击事件
                     addToCartIcon.style.pointerEvents = 'auto'; // 启用点击事件
@@ -386,7 +386,6 @@ async function fetchAndDisplayProducts() {
     }
     await fetchCategories();
 }
-
 
 // 弹出窗口显示图片的功能
 function showPopup(url) {
