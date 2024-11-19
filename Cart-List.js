@@ -159,6 +159,9 @@ function displayCart() {
         productImg.src = image;
         productImg.alt = name;
 
+        // 为图片绑定点击事件，弹出大图
+        productImg.addEventListener('click', () => showPopup(image));
+
         const details = document.createElement('div');
         details.classList.add('details');
 
@@ -202,6 +205,52 @@ function displayCart() {
 
     // 更新总价和选中产品的数量
     updateTotalPrice();
+}
+
+// 弹出窗口显示图片的功能
+function showPopup(url) {
+    // 检查是否已有弹窗，避免重复
+    if (document.getElementById('popup')) return;
+
+    const popup = document.createElement('div');
+    popup.id = 'popup';
+    popup.style.position = 'fixed';
+    popup.style.top = '0';
+    popup.style.left = '0';
+    popup.style.width = '100vw';
+    popup.style.height = '100vh';
+    popup.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    popup.style.display = 'flex';
+    popup.style.alignItems = 'center';
+    popup.style.justifyContent = 'center';
+    popup.style.zIndex = '1000';
+
+    // 点击弹窗外部关闭弹窗
+    popup.addEventListener('click', hidePopup);
+
+    const img = document.createElement('img');
+    img.src = url;
+    img.style.maxWidth = '90%';
+    img.style.maxHeight = '90%';
+    img.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.7)';
+    img.style.borderRadius = '10px';
+    img.style.zIndex = '1001';
+
+    // 点击图片时阻止事件冒泡，避免关闭弹窗
+    img.addEventListener('click', event => {
+        event.stopPropagation();
+    });
+
+    popup.appendChild(img);
+    document.body.appendChild(popup);
+}
+
+// 隐藏弹窗的功能
+function hidePopup() {
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.remove();
+    }
 }
 
 // 用户自己删除购物车内的产品
