@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   productLoading.style.display = "block";
 
   // Google Apps Script API URL
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxnQCHAuyReY36qo-r6gP-TB68fsS9Wre0tgeOYsO_h79LvQQDdQK2kmp1l00CUwMB8/exec'; // 替换为实际的 Google Apps Script 部署 URL
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbx7UJW9iZGwLvghAIGvguZk2ZlUDSNssv-0pBibk7fappjtgZrI_mwLCGcMg7Gp7lnH/exec'; // 替换为实际的 Google Apps Script 部署 URL
 
   try {
       // 发送请求获取购买记录
