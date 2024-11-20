@@ -458,7 +458,7 @@ function toggleCart(icon, product) {
         cart.push(product);
         icon.classList.remove('fa-cart-plus');
         icon.classList.add('fa-cart-plus');
-        icon.style.color = '#20a520'; // 添加到购物车时更改颜色
+        icon.style.color = 'yellow'; // 添加到购物车时更改颜色
     } else {
         // 如果产品已经在购物车中，移除它
         cart.splice(productIndex, 1);
