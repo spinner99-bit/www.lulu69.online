@@ -26,12 +26,27 @@ async function submitRegister() {
   submitButton.disabled = true;
   submitButton.textContent = '注册中...';
 
-  const password = document.getElementById('registerPassword').value;
-  const fullName = document.getElementById('registerFullName').value;
-  let wanumber = document.getElementById('registerWaNumber').value;
+  const password = document.getElementById('registerPassword').value.trim();
+  const fullName = document.getElementById('registerFullName').value.trim();
+  let wanumber = document.getElementById('registerWaNumber').value.trim();
 
   // 自动生成 Username
-  const username = 'user_' + Math.floor(Math.random() * 100000);
+  const username = 'L69' + (Math.floor(Date.now() / 1000) % 10000) + Math.floor(Math.random() * 100);
+
+  // 输入长度验证
+  if (password.length < 4) {
+    alert('密码不得少于 4 个字符！');
+    submitButton.disabled = false;
+    submitButton.textContent = '注册账号';
+    return;
+  }
+
+  if (wanumber.length < 8) {
+    alert('请输入有效的手机号码！');
+    submitButton.disabled = false;
+    submitButton.textContent = '注册账号';
+    return;
+  }
 
   // 检查 waNumber 开头并进行修改
   if (wanumber.startsWith('1')) {
@@ -39,7 +54,7 @@ async function submitRegister() {
   } else if (wanumber.startsWith('0')) {
     wanumber = '6' + wanumber; // 如果以0开头，添加6并保留0
   } else if (!wanumber.startsWith('6')) {
-    console.warn('Wasap number must start with 6, 0, or 1.');
+    console.warn('手机号码必须以 6、0 或 1 开头。');
   }
 
   try {
@@ -66,20 +81,19 @@ async function submitRegister() {
       localStorage.setItem('wanumber', wanumber);
       localStorage.setItem('walletAmount', 0.00);
 
-      // 登录成功后跳转到 profile.html
+      // 注册成功后跳转到 profile.html
       window.location.href = 'index';
     } else {
-      document.getElementById('registerMessage').textContent = result.message;
+      alert(result.message); // 使用 alert 显示失败信息
     }
   } catch (error) {
     console.error('Error during registration:', error);
-    document.getElementById('registerMessage').textContent = 'Registration failed. Please try again.';
+    alert('注册失败，请重试.'); // 使用 alert 显示错误信息
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = 'Sign Up';
+    submitButton.textContent = '注册账号';
   }
 }
-
 
 // 提交登录表单
 async function submitLogin() {
@@ -87,8 +101,23 @@ async function submitLogin() {
   submitButton.disabled = true;
   submitButton.textContent = '登入中...';
 
-  const wanumber = document.getElementById('loginWaNumber').value;
-  const password = document.getElementById('loginPassword').value;
+  const wanumber = document.getElementById('loginWaNumber').value.trim(); // 去除空格
+  const password = document.getElementById('loginPassword').value.trim(); // 去除空格
+
+  // 输入长度验证
+  if (wanumber.length < 8) {
+    alert('请输入有效的手机号码。');
+    submitButton.disabled = false;
+    submitButton.textContent = '登入账号';
+    return;
+  }
+
+  if (password.length < 4) {
+    alert('密码不得少于 4 个字符。');
+    submitButton.disabled = false;
+    submitButton.textContent = '登入账号';
+    return;
+  }
 
   try {
     const response = await fetch(APP_SCRIPT_URL, {
@@ -116,16 +145,17 @@ async function submitLogin() {
       // 跳转到 profile.html
       window.location.href = 'index';
     } else {
-      document.getElementById('loginMessage').textContent = result.message;
+      alert(result.message); // 使用 alert 显示失败信息
     }
   } catch (error) {
     console.error('Error during login:', error);
-    document.getElementById('loginMessage').textContent = 'An error occurred while logging in. Please try again.';
+    alert('登入失败，请重试。'); // 使用 alert 显示错误信息
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = 'Sign In';
+    submitButton.textContent = '登入账号';
   }
 }
+
     
     document.addEventListener("DOMContentLoaded", function() {
       const currentPath = window.location.pathname;
