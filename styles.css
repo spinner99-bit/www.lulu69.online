@@ -176,12 +176,16 @@ header span{
 }
 
 /* Container for the bottom navigation */
-.bottom-nav {
+footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     background-color: red;
+    display: grid;
+}
+
+.bottom-nav {
     display: flex;
     justify-content: space-around;
 }
@@ -207,6 +211,17 @@ header span{
 .bottom-nav a .icon {
     font-size: 26px;
     display: block;
+}
+
+.bottom-copyRight {
+    text-align: center;
+    padding: 5px 0;
+    background-color: white;
+}
+
+.bottom-copyRight p {
+    font-size: xx-small;
+    color: red;
 }
 
 .changePass-Wrapper{
@@ -444,11 +459,7 @@ header span{
 .home-productCategory{
     font-size: smaller;
     text-align: right;
-    background-color: red;
-    color: white;
     font-weight: 900;
-    padding: 7px 10px;
-    border-radius: 50%;
 }
 
 .home-productPrice{
