@@ -322,7 +322,7 @@ document.getElementById('checkoutButton').addEventListener('click', async () => 
     // 检查余额是否足够
     if (walletAmount < totalPrice) {
         alert('余额不足，请先充值！');
-        window.location.href = 'Reload-Points.html';
+        window.location.href = 'Reload-Points';
         resetCheckoutButton();
         return;
     }
@@ -384,8 +384,7 @@ function getSelectedProducts() {
                 name: product[0],       // 产品名称
                 category: product[1],
                 price: product[2],      // 产品价格
-                link: product[3],       // 产品链接
-                image: product[4],      // 产品图片
+                image: product[3],      // 产品图片
             });
         }
     });
