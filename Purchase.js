@@ -75,11 +75,11 @@ async function fetchWalletAmount() {
       // 更新 localStorage 的 walletAmount
       localStorage.setItem("walletAmount", walletAmount);
     } else {
-      alert(`加载中！请稍等片刻`);
+      // alert(`加载中！请稍等片刻`);
       console.log(`${result.message}`);
     }
   } catch (error) {
-      alert(`加载中！请稍等片刻`);
+      // alert(`加载中！请稍等片刻`);
     console.log(`${result.message}`);
   }
 }
