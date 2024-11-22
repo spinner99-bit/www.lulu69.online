@@ -6,6 +6,25 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
+// 检查用户是否是第一次访问
+if (!localStorage.getItem('firstVisit')) {
+    // 第一次访问，延迟3秒后显示弹窗和遮罩层
+    setTimeout(function() {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block'; // 显示背景遮罩
+    }, 3000); // 3000毫秒 = 3秒
+
+    // 设置 localStorage 标记，之后再访问就不会弹窗
+    localStorage.setItem('firstVisit', 'true');
+}
+
+// 关闭弹窗的功能
+document.getElementById('closePopup').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'none'; // 隐藏弹窗
+    document.getElementById('overlay').style.display = 'none'; // 隐藏背景遮罩
+});
+
+
 // 检查用户登录状态
 async function checkLoginStatus() {
     const username = localStorage.getItem('username');
