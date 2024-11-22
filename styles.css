@@ -126,6 +126,10 @@ header{
     align-items: center;
 }
 
+.header-userInfo i{
+    margin-right: 5px;
+}
+
 .plsLogin-button{
     padding: 5px 10px;
     border: none;
@@ -138,18 +142,18 @@ header{
     font-size: 16px;
     font-weight: 900;
     align-self: center;
-    margin-left: 5px;
 }
 
 .header-balance{
     display: flex;
     align-items: center;
+    color: gold;
 }
 
-.header-balance .fa-coins,
-.header-balance .fa-user{
-    font-size: 20px;
-    color: white;
+.header-balance img{
+    height: 22px;
+    width: auto;
+    margin-right: 5px;
 }
 
 .fa-arrow-left{
@@ -369,12 +373,13 @@ footer {
     align-items: center;
     background-color: white;
     padding: 10px 0;
+    text-align: center;
 }
 
 .home-product-select select{
     text-align: center;
-    border: 1PX solid red;
-    padding: 5px;
+    border: 1px solid red;
+    padding: 5px 10px;
     font-weight: 900;
     background-color: transparent;
     color: red;
@@ -417,14 +422,14 @@ footer {
     border-top-right-radius: 5px;
 }
 
-.home-product-wrapper .product-card img {
+.home-product-wrapper .image-wrapper img {
     width: 100%;
     height: auto;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.product-card img:hover{
+.image-wrapper img:hover{
     transform: scale(1.2);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
@@ -464,8 +469,21 @@ footer {
 
 .home-productPrice{
     font-size: medium;
-    color: red;
+    color: gold;
     text-align: left;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.home-productPrice img {
+    width: auto;
+    height: 20px;
+    margin-right: 3px;
 }
 
 .home-productAddCart{
