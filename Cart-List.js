@@ -20,32 +20,34 @@ async function checkLoginStatus() {
     } else {
         // 如果已登录，显示欢迎信息和加载状态
         headerDiv.innerHTML = `
-            <div onclick="window.history.back()"><i class="fa-solid fa-arrow-left"></i></div>
-            <span>购物车 (${cartCount})</span>
-            <div class="header-balance">
-                <i class="fa-solid fa-coins"></i>
-            <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
-            </div>
-      `;
-  
-      // 获取并更新钱包金额
-      await fetchWalletAmount(); // 调用更新钱包余额的方法
-  
-      // 从 localStorage 获取更新后的钱包金额
-      const updatedWalletAmount = localStorage.getItem('walletAmount');
-  
-      // 格式化钱包金额
-      const formattedWalletAmount = formatWalletAmount(updatedWalletAmount);
-  
-      // 更新 header-balance 内容
-      const headerBalance = `${formattedWalletAmount}`;
-      const balanceDiv = document.querySelector('.header-balance');
-      balanceDiv.innerHTML = `
-        <i class="fa-solid fa-coins"></i>
-        <div class="welcome-message">${headerBalance}</div>
-      `;
+          <div class="header-userInfo">
+              <i class="fa-solid fa-user"></i>
+              <div class="welcome-message">${number}</div>
+          </div>
+          <div class="header-balance">
+              <img src="Element/Icon/Coin.webp">
+              <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
+          </div>
+        `;
+    
+        // 获取并更新钱包金额
+        await fetchWalletAmount(); // 调用更新钱包余额的方法
+    
+        // 从 localStorage 获取更新后的钱包金额
+        const updatedWalletAmount = localStorage.getItem('walletAmount');
+    
+        // 格式化钱包金额
+        const formattedWalletAmount = formatWalletAmount(updatedWalletAmount);
+    
+        // 更新 header-balance 内容
+        const headerBalance = `${formattedWalletAmount}`;
+        const balanceDiv = document.querySelector('.header-balance');
+        balanceDiv.innerHTML = `
+          <img src="Element/Icon/Coin.webp">
+          <div class="welcome-message">${headerBalance}</div>
+        `;
+      }
     }
-  }
   
   // 调用 Google Apps Script 获取钱包余额
   async function fetchWalletAmount() {
@@ -134,7 +136,7 @@ function displayCart() {
     // 如果购物车为空，显示提示
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<p class="ifCartBlank">购物车中没有物品</p>';
-        totalPriceElement.innerHTML = '总价：<i class="fa-solid fa-coins"></i> 0';
+        totalPriceElement.innerHTML = '<img src="Element/Icon/Coin.webp"> 0';
         checkoutButton.textContent = '结账 (0)';
         return;
     }
@@ -169,12 +171,17 @@ function displayCart() {
         productName.classList.add('product-name');
         productName.textContent = name;
 
+        const productPriceWraper = document.createElement('div');
+        productPriceWraper.classList.add('productPrice-Wrapper');
+
         const productPrice = document.createElement('div');
         productPrice.classList.add('product-price');
-        productPrice.innerHTML = `<i class="fa-solid fa-coins"></i> ${parseFloat(price)}`;
+        productPrice.innerHTML = `<img src="Element/Icon/Coin.webp"> ${parseFloat(price)}`;
 
+        productPriceWraper.appendChild(productPrice);
+        
         details.appendChild(productName);
-        details.appendChild(productPrice);
+        details.appendChild(productPriceWraper);
 
         // 删除按钮
         const deleteIcon = document.createElement('i');
@@ -280,7 +287,7 @@ function updateTotalPrice() {
         }
     });
 
-    totalPriceElement.innerHTML = `总价：<i class="fa-solid fa-coins"></i> ${totalPrice}`;
+    totalPriceElement.innerHTML = `<img src="Element/Icon/Coin.webp"> ${totalPrice}`;
     checkoutButton.textContent = `结账 (${selectedCount})`; // 更新结账按钮文本
 }
 
