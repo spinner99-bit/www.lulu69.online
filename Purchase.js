@@ -20,12 +20,12 @@ async function checkLoginStatus() {
     // 如果已登录，显示欢迎信息和加载状态
     headerDiv.innerHTML = `
       <div class="header-userInfo">
-        <i class="fa-solid fa-user"></i>
-        <div class="welcome-message">${number}</div>
+          <i class="fa-solid fa-user"></i>
+          <div class="welcome-message">${number}</div>
       </div>
       <div class="header-balance">
-          <i class="fa-solid fa-coins"></i>
-        <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
+          <img src="Element/Icon/Coin.webp">
+          <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
       </div>
     `;
 
@@ -42,7 +42,7 @@ async function checkLoginStatus() {
     const headerBalance = `${formattedWalletAmount}`;
     const balanceDiv = document.querySelector('.header-balance');
     balanceDiv.innerHTML = `
-      <i class="fa-solid fa-coins"></i>
+      <img src="Element/Icon/Coin.webp">
       <div class="welcome-message">${headerBalance}</div>
     `;
   }
