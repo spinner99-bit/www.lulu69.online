@@ -79,7 +79,7 @@ async function submitRegister() {
       localStorage.setItem('password', password);
       localStorage.setItem('fullName', fullName);
       localStorage.setItem('wanumber', wanumber);
-      localStorage.setItem('walletAmount', 0.00);
+      localStorage.setItem('walletAmount', 125);
 
       // 注册成功后跳转到 profile.html
       window.location.href = 'index';
