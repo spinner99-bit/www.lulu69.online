@@ -10,7 +10,7 @@ document.addEventListener('keydown', function (e) {
 if (!localStorage.getItem('firstVisit')) {
     // 第一次访问，延迟3秒后显示弹窗和遮罩层
     setTimeout(function() {
-        document.getElementById('popup').style.display = 'block';
+        document.getElementById('firstVisit-popUp').style.display = 'block';
         document.getElementById('overlay').style.display = 'block'; // 显示背景遮罩
     }, 3000); // 3000毫秒 = 3秒
 
@@ -20,7 +20,7 @@ if (!localStorage.getItem('firstVisit')) {
 
 // 关闭弹窗的功能
 document.getElementById('closePopup').addEventListener('click', function() {
-    document.getElementById('popup').style.display = 'none'; // 隐藏弹窗
+    document.getElementById('firstVisit-popUp').style.display = 'none'; // 隐藏弹窗
     document.getElementById('overlay').style.display = 'none'; // 隐藏背景遮罩
 });
 
@@ -290,7 +290,6 @@ function filterProductsByCategory(selectedCategory) {
 
     displayProducts(filteredProducts);
 }
-
 
 async function displayProducts(products) {
     const productContainer = document.getElementById('productContainer');
