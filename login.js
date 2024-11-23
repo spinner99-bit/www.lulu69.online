@@ -1,4 +1,4 @@
-const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQ3ql_0ek4ILUVclu6YvkpHPgw0cSlLa56bvtgYgDp-wxFt0OaW3kFY1-6mxeafTME/exec'; // 替换为你的 Google Apps Script URL
+const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5q2CQrT4S05mN039gHnYOVvh_QdbIkiOcXOIs2QgC9DkzQ9HiWEGZHWuVFZjOq0Fw/exec'; // 替换为你的 Google Apps Script URL
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
@@ -69,6 +69,7 @@ async function submitRegister() {
         password: password,
         fullName: fullName,
         wanumber: wanumber,
+        wallet: 125,
       })
     });
 
