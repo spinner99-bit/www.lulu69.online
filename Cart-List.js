@@ -20,10 +20,8 @@ async function checkLoginStatus() {
     } else {
         // 如果已登录，显示欢迎信息和加载状态
         headerDiv.innerHTML = `
-          <div class="header-userInfo">
-              <i class="fa-solid fa-user"></i>
-              <div class="welcome-message">${number}</div>
-          </div>
+        <div onclick="window.history.back()"><i class="fa-solid fa-arrow-left"></i></div>
+        <span>购物车 (${cartCount})</span>
           <div class="header-balance">
               <img src="Element/Icon/Coin.webp">
               <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
