@@ -69,7 +69,7 @@ async function submitRegister() {
         password: password,
         fullName: fullName,
         wanumber: wanumber,
-        wallet: 125,
+        wallet: 75,
       })
     });
 
