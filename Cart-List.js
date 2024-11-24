@@ -351,7 +351,7 @@ document.getElementById('checkoutButton').addEventListener('click', async () => 
         products,
         beforeBalance,
         afterBalance,
-        timestamp: new Date().toLocaleString('zh-CN', { hour12: false })
+        timestamp: new Date().toLocaleString('ms-MY', { hour12: false })
     };
 
     try {
