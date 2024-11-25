@@ -355,26 +355,58 @@ document.getElementById('checkoutButton').addEventListener('click', async () => 
 
     try {
         const response = await savePurchaseLog(purchaseLog, username, newWalletAmount);
+        const paymentResult = document.getElementById('paymentResult');
+        const successfulPay = document.getElementById('successfulPay');
+        const unsuccessfulPay = document.getElementById('UnsuccessfulPay');
+        const audio = new Audio('Element/applepay.mp3'); // 创建音频对象
+        
         if (response.success) {
-            alert('付款成功！感谢您的购买。');
-            
+            // 显示付款成功动画
+            paymentResult.style.display = 'block';
+            successfulPay.style.display = 'block';
+            unsuccessfulPay.style.display = 'none';
+        
+            // 延迟 1.5 秒播放音频
+            setTimeout(() => {
+                audio.play().catch((error) => {
+                    console.error('音频播放失败:', error);
+                });
+            }, 1300); // 延迟 1500 毫秒 (1.5 秒)
+        
             // 从购物车中移除已购买的产品
             removePurchasedProducts(products);
-            
+        
             // 清空购物车并更新 localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
             displayCart(); // 更新页面上的购物车显示
             checkLoginStatus();
-            window.location.href = 'Purchase';
+        
+            // 等待 3 秒后跳转页面
+            setTimeout(() => {
+                window.location.href = 'Purchase';
+            }, 3000);
         } else {
-            alert('付款失败，请稍后再试。');
+            // 显示付款失败动画
+            paymentResult.style.display = 'block';
+            successfulPay.style.display = 'none';
+            unsuccessfulPay.style.display = 'block';
         }
     } catch (error) {
-        alert(`付款失败，请稍后再试。${error.message}`);
+        alert(`付款失败，${error.message}`);
+    
+        // 显示付款失败动画
+        const paymentResult = document.getElementById('paymentResult');
+        const successfulPay = document.getElementById('successfulPay');
+        const unsuccessfulPay = document.getElementById('UnsuccessfulPay');
+    
+        paymentResult.style.display = 'block';
+        successfulPay.style.display = 'none';
+        unsuccessfulPay.style.display = 'block';
     }
-
+    
     // 处理完成后恢复按钮状态
     resetCheckoutButton();
+    
 });
 
 // 获取选中的产品
