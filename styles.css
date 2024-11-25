@@ -361,6 +361,29 @@ footer {
     color: red;
 }
 
+.loaderImage {
+    width: 100%;
+    height: auto;
+}
+
+.loaderMB {
+    display: none;
+}
+
+.loaderPC {
+    display: block;
+}
+
+@media (max-width: 425px) {
+    .loaderMB {
+        display: block;
+    }
+    
+    .loaderPC {
+        display: none;
+    }
+}
+
 #productLoading .bx-loader-circle{
     -webkit-animation: spin 1.5s linear infinite;
 	-moz-animation: spin 1.5s linear infinite;
