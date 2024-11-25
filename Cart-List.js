@@ -350,8 +350,7 @@ document.getElementById('checkoutButton').addEventListener('click', async () => 
         username,
         products,
         beforeBalance,
-        afterBalance,
-        timestamp: new Date()
+        afterBalance
     };
 
     try {
@@ -398,7 +397,7 @@ function getSelectedProducts() {
 
 // 保存购买记录到 Google Sheets，并更新余额
 async function savePurchaseLog(purchaseLog, username, newWalletAmount) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZ_6RRdmA9ZxDKXIj8hG4cCbPVvXoojkYO5m_a2D3wwXJqFO_voB-2np410wpukrR3/exec'; // 替换为您的 Google Apps Script 部署 URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzt47ycyTcglp0iglEhYzcshb7vQfofW8poeiw0VX4udrsFmTOROfN6wySsuyC2a8rj/exec'; // 替换为您的 Google Apps Script 部署 URL
     const response = await fetch(`${scriptURL}?action=savePurchaseLog`, {
         method: 'POST',
         body: JSON.stringify(purchaseLog)
