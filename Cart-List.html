@@ -33,7 +33,40 @@
             <div class="total-price">总价：<span id="totalPrice">0</span></div>
             <button id="checkoutButton" class="checkout-button">结账 (0)</button>
         </div>
-    </div>    
+    </div>  
+    
+    <div class="paymentProccessing" id="paymentResult" style="display: none;">
+    
+        <div class="popupResult-wrapper" id="successfulPay" style="display: none;">
+            <div class="resultContainer-wrapper">
+                <div class="successfullyPay-animation">
+                    <div class="successPay-greenCover">
+                        <div class="successPay-tick"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="resultContainer-wrapper">
+                <h1>付款成功！感谢您的购买</h1>
+            </div>
+        </div>
+
+        <div class="popupResult-wrapper" id="UnsuccessfulPay" style="display: none;">
+            <div class="resultContainer-wrapper">
+                <div class="UnsuccessfullyPay-animation">
+                    <div class="UnsuccessPay-redCover">
+                        <div class="UnsuccessPay-error">
+                            <div class="cross cross-1"></div>
+                            <div class="cross cross-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="resultContainer-wrapper">
+                <h1>付款失败，请稍后再试</h1>
+            </div>
+        </div>
+
+    </div>
     
   <script src="Cart-List.js"></script>
 
