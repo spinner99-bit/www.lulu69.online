@@ -492,6 +492,125 @@ function toggleCart(icon, product) {
     updateCartCount();
 }
 
+const swiperContainer = document.querySelector('.swiperContainer');
+const images = document.querySelectorAll('.swiperContainer img');
+const progressDotsContainer = document.querySelector('.progressDots'); 
+let currentIndex = 0;
+let totalImages = images.length;
+let autoPlayInterval;
+let startX = 0;
+let isDragging = false;
+let diffX = 0;  // 用于记录拖动的差值
+let initialTransform = 0;  // 记录拖动开始时的初始位移
+
+// 生成进度条上的点
+function generateProgressDots() {
+    for (let i = 0; i < totalImages; i++) {
+        const dot = document.createElement('div');
+        dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateSwiperPosition();
+            updateProgressDots();
+        });
+        progressDotsContainer.appendChild(dot);
+    }
+    updateProgressDots();
+}
+
+// 更新进度点的状态
+function updateProgressDots() {
+    const dots = document.querySelectorAll('.progressDots div');
+    dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === currentIndex) {
+            dot.classList.add('active');
+        }
+    });
+}
+
+// 更新滑动位置
+function updateSwiperPosition() {
+    const offset = -currentIndex * 100;
+    swiperContainer.style.transform = `translateX(${offset}%)`;
+}
+
+// 切换到下一张图片
+function nextImage() {
+    currentIndex = (currentIndex + 1) % totalImages;
+    updateSwiperPosition();
+    updateProgressDots();
+}
+
+// 切换到上一张图片
+function prevImage() {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    updateSwiperPosition();
+    updateProgressDots();
+}
+
+// 启动自动播放
+function startAutoPlay() {
+    autoPlayInterval = setInterval(nextImage, 3000); // 每3秒切换一次
+}
+
+// 停止自动播放
+function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+}
+
+// 鼠标拖动切换图片
+swiperContainer.addEventListener('mousedown', (e) => {
+    startX = e.pageX;
+    isDragging = true;
+    initialTransform = parseInt(swiperContainer.style.transform.replace('translateX(', '').replace('%)', '') || 0); // 记录初始位移
+    swiperContainer.style.cursor = 'grabbing'; // 设置为抓取手型
+    images.forEach(img => img.classList.add('dragging')); // 拖动时添加拖动效果
+});
+
+swiperContainer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    diffX = e.pageX - startX; // 计算拖动差值
+    const moveX = initialTransform + (diffX / window.innerWidth) * 100; // 根据差值计算新的位移
+
+    swiperContainer.style.transform = `translateX(${moveX}%)`; // 更新滑动位置
+});
+
+swiperContainer.addEventListener('mouseup', () => {
+    isDragging = false;
+    swiperContainer.style.cursor = 'pointer'; // 恢复鼠标样式为指针
+    images.forEach(img => img.classList.remove('dragging')); // 移除拖动效果
+
+    // 根据拖动的距离判断是否切换图片
+    if (diffX > 50) {
+        nextImage();
+    } else if (diffX < -50) {
+        prevImage();
+    } else {
+        updateSwiperPosition(); // 否则回到原来的位置
+    }
+    stopAutoPlay();
+    startAutoPlay(); // 重启自动播放
+});
+
+swiperContainer.addEventListener('mouseleave', () => {
+    if (isDragging) {
+        isDragging = false;
+        swiperContainer.style.cursor = 'pointer'; // 恢复鼠标样式
+        images.forEach(img => img.classList.remove('dragging')); // 移除拖动效果
+        updateSwiperPosition(); // 重置图片位置
+    }
+});
+
+// 页面加载时，确保在 DOM 加载后启动自动播放
+document.addEventListener('DOMContentLoaded', () => {
+    generateProgressDots(); // 生成进度条点
+    updateSwiperPosition();
+    updateProgressDots();
+    startAutoPlay(); // 启动自动播放
+});
+
+
 // 页面加载时
 window.onload = function() {
     checkLoginStatus();
