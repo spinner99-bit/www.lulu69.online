@@ -188,6 +188,7 @@ footer {
     width: 100%;
     background-color: red;
     display: grid;
+    z-index: 1000;
 }
 
 .bottom-nav {
@@ -388,6 +389,65 @@ footer {
     -webkit-animation: spin 1.5s linear infinite;
 	-moz-animation: spin 1.5s linear infinite;
 	animation: spin 1.5s linear infinite;
+}
+
+.swiperWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+}
+
+.swiperContainer {
+    display: flex;
+    transition: transform 0.3s ease; /* 增加平滑过渡 */
+    cursor: grab; /* 初始状态下显示抓取手型 */
+}
+
+.swiperContainer img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* 保证图片适配容器 */
+}
+
+.progressBar {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.progressDots {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    z-index: 2;
+}
+
+.progressDots div {
+    width: 15px;
+    height: 7px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.progressDots .active {
+    background-color: red; /* 激活点的颜色 */
+    width: 25px;
+}
+
+.swiperContainer img.dragging {
+    opacity: 0.7; /* 拖动时图片透明度降低 */
+    transform: scale(1.05); /* 图片轻微缩放 */
 }
 
 .home-product-select{
