@@ -526,11 +526,24 @@ footer {
 }
 
 .home-product-wrapper .name-category {
-    display: flex;
+    display: grid;
     width: 100%;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    text-align: center;
     align-items: center;
+}
+
+.home-productName{
+    font-size: medium;
+    text-align: center;
+}
+
+.home-productCategory{
+    font-size: smaller;
+    text-align: center;
+    font-weight: 900;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    color: blue;
 }
 
 .home-product-wrapper .price-cart {
@@ -538,17 +551,6 @@ footer {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-}
-
-.home-productName{
-    font-size: medium;
-    text-align: left;
-}
-
-.home-productCategory{
-    font-size: smaller;
-    text-align: right;
-    font-weight: 900;
 }
 
 .home-productPrice{
