@@ -155,7 +155,7 @@ function updateCartCount() {
 }
 
 const categoryDataUrl = 'https://script.google.com/macros/s/AKfycbwX_6CEh5ag-oWEfKKuxs534ZscyVtti5-9vE-kEBRIiLEAfC1M6wdT6C-NKx7XgYtM/exec?action=getWebCategory';
-const productDataUrl = 'https://script.google.com/macros/s/AKfycbxmpdxpdavl3-l8yIs44lH-1meoJJyNMcLBOjwXLdH2uaLgwm4w2Ub9Isz54gMzeorP/exec?action=getWebProducts';
+const productDataUrl = 'https://script.google.com/macros/s/AKfycbyynYsmELxME4SVHFcNDNeGkhc0nr8htNaKpgy_nzro0w8E_CbVjH5fNQnqlX3IC4uG/exec?action=getWebProducts';
 const purchaseLogUrl = 'https://script.google.com/macros/s/AKfycbx7UJW9iZGwLvghAIGvguZk2ZlUDSNssv-0pBibk7fappjtgZrI_mwLCGcMg7Gp7lnH/exec'; // 替换为实际部署的 URL
 
 // Global variables to store categories and products
@@ -241,30 +241,23 @@ document.getElementById('categoryContainer').addEventListener('change', (event) 
 
 function displayCategories(categories) {
     const categoryContainer = document.getElementById('categoryContainer');
-    categoryContainer.innerHTML = ''; // 清空现有选项
+    categoryContainer.innerHTML = '';
 
-    // 默认显示所有产品的选项
+    // 默认显示所有产品选项
     const allOption = document.createElement('option');
     allOption.value = '全部';
-    allOption.textContent = `全部 (${allProducts.length})`; // 显示所有产品的数量
+    allOption.textContent = `全部 (${allProducts.length})`;
     categoryContainer.appendChild(allOption);
 
-    // 为每个分类创建一个选项并显示产品数量
+    // 为每个分类创建选项
     categories.forEach(category => {
-        const normalizedCategory = category.trim().toLowerCase();
-
-        // 过滤符合当前分类的产品
-        const filteredProducts = allProducts.filter(product => {
-            const productCategory = product[1].trim().toLowerCase();
-            return productCategory === normalizedCategory;
-        });
-
-        // 调试：输出每个分类和过滤后的产品数量
-        // console.log(`Category: ${category}, Filtered Products: ${filteredProducts.length}`);
+        const filteredProducts = allProducts.filter(product => 
+            product[1].some(cat => cat.toLowerCase() === category.toLowerCase())
+        );
 
         const option = document.createElement('option');
         option.value = category;
-        option.textContent = `${category} (${filteredProducts.length})`; // 显示分类和数量
+        option.textContent = `${category} (${filteredProducts.length})`;
 
         if (filteredProducts.length === 0) {
             option.disabled = true;
@@ -273,20 +266,20 @@ function displayCategories(categories) {
         categoryContainer.appendChild(option);
     });
 
-    // 默认显示所有产品
-    displayProducts(allProducts);
+    displayProducts(allProducts); // 默认显示所有产品
 }
 
 // 根据选定的分类过滤产品
 function filterProductsByCategory(selectedCategory) {
-    const normalizedCategory = selectedCategory.trim().toLowerCase();
-    const filteredProducts = allProducts.filter(product => {
-        const productCategory = product[1].trim().toLowerCase();
-        return productCategory === normalizedCategory;
-    });
+    if (selectedCategory === '全部') {
+        displayProducts(allProducts);
+        return;
+    }
 
-    // 调试：输出过滤后的产品数量
-    // console.log(`Filtered Products for '${selectedCategory}': ${filteredProducts.length}`);
+    const normalizedCategory = selectedCategory.toLowerCase();
+    const filteredProducts = allProducts.filter(product => 
+        product[1].some(cat => cat.toLowerCase() === normalizedCategory)
+    );
 
     displayProducts(filteredProducts);
 }
@@ -309,7 +302,7 @@ async function displayProducts(products) {
             productContainer.innerHTML = '<p>No products found.</p>';
         } else {
             products.forEach(product => {
-                const [name, category, price, image, status, date] = product;
+                const [name, categories, price, image, status, date] = product;
 
                 const productCard = document.createElement('div');
                 productCard.classList.add('product-card');
@@ -336,7 +329,7 @@ async function displayProducts(products) {
 
                 const productCategory = document.createElement('p');
                 productCategory.classList.add('home-productCategory');
-                productCategory.textContent = category;
+                productCategory.textContent = categories.join(' '); // 显示所有分类
 
                 nameCategoryDiv.appendChild(productName);
                 nameCategoryDiv.appendChild(productCategory);
