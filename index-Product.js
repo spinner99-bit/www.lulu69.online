@@ -155,7 +155,7 @@ function updateCartCount() {
 }
 
 const categoryDataUrl = 'https://script.google.com/macros/s/AKfycbwX_6CEh5ag-oWEfKKuxs534ZscyVtti5-9vE-kEBRIiLEAfC1M6wdT6C-NKx7XgYtM/exec?action=getWebCategory';
-const productDataUrl = 'https://script.google.com/macros/s/AKfycbyynYsmELxME4SVHFcNDNeGkhc0nr8htNaKpgy_nzro0w8E_CbVjH5fNQnqlX3IC4uG/exec?action=getWebProducts';
+const productDataUrl = 'https://script.google.com/macros/s/AKfycbwWB9lrviSo_w4EuKuF--AQVR_kgks91EIsP0epDLgMaofZPiiuD0PbsahJ1erJuAlL/exec?action=getWebProducts';
 const purchaseLogUrl = 'https://script.google.com/macros/s/AKfycbx7UJW9iZGwLvghAIGvguZk2ZlUDSNssv-0pBibk7fappjtgZrI_mwLCGcMg7Gp7lnH/exec'; // 替换为实际部署的 URL
 
 // Global variables to store categories and products
