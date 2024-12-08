@@ -429,7 +429,7 @@ function getSelectedProducts() {
 
 // 保存购买记录到 Google Sheets，并更新余额
 async function savePurchaseLog(purchaseLog, username, newWalletAmount) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzt47ycyTcglp0iglEhYzcshb7vQfofW8poeiw0VX4udrsFmTOROfN6wySsuyC2a8rj/exec'; // 替换为您的 Google Apps Script 部署 URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwBq_PRRe1qhdQuxdD4SRY8MQhhiAl90fLCETsnBJyaTboG3QBS-XbE0u6JZwi1Pi04/exec'; // 替换为您的 Google Apps Script 部署 URL
     const response = await fetch(`${scriptURL}?action=savePurchaseLog`, {
         method: 'POST',
         body: JSON.stringify(purchaseLog)
