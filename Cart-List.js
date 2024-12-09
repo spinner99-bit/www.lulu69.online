@@ -299,192 +299,87 @@ function deleteProduct(product) {
     displayCart();  // 刷新页面上的购物车显示
 }
 
-// 当购物车或产品选择状态发生变化时更新按钮状态
-document.addEventListener('change', () => {
-    updateCheckoutButtonState();
-});
-
-// 结账按钮功能
 document.getElementById('checkoutButton').addEventListener('click', async () => {
-    const checkoutButton = document.getElementById('checkoutButton');
-    
-    // 禁用按钮并更改文本
-    checkoutButton.disabled = true;
-    checkoutButton.textContent = '处理中...';
-
-    const totalPriceElement = document.getElementById('totalPrice');
-    const totalPrice = parseFloat(totalPriceElement.textContent.replace('总价：', ''));
-    const walletAmount = parseFloat(localStorage.getItem('walletAmount'));
-    const username = localStorage.getItem('username');
-    
-    // 检查用户是否登录
-    if (!username) {
-        alert('请先登录！');
-        resetCheckoutButton();
-        return;
-    }
-
-    // 检查余额是否足够
-    if (walletAmount < totalPrice) {
-        alert('余额不足，请先充值！');
-        window.location.href = 'Reload-Points';
-        resetCheckoutButton();
-        return;
-    }
-
-    // 保存购买前余额
-    const beforeBalance = walletAmount;
-
-    // 扣除余额并更新 localStorage
-    const newWalletAmount = walletAmount - totalPrice;
-    localStorage.setItem('walletAmount', newWalletAmount.toFixed(2));
-
-    // 保存购买后余额
-    const afterBalance = newWalletAmount;
-
-    // 获取已选择的产品
-    const products = getSelectedProducts();
-
-    // 保存购买记录到 Google Sheets
-    const purchaseLog = {
-        username,
-        products,
-        beforeBalance,
-        afterBalance
-    };
-
-    try {
-        const response = await savePurchaseLog(purchaseLog, username, newWalletAmount);
-        const paymentResult = document.getElementById('paymentResult');
-        const successfulPay = document.getElementById('successfulPay');
-        const unsuccessfulPay = document.getElementById('UnsuccessfulPay');
-        const audio = new Audio('Element/applepay.mp3'); // 创建音频对象
-        
-        if (response.success) {
-            // 显示付款成功动画
-            paymentResult.style.display = 'block';
-            successfulPay.style.display = 'block';
-            unsuccessfulPay.style.display = 'none';
-        
-            // 延迟 1.5 秒播放音频
-            setTimeout(() => {
-                audio.play().catch((error) => {
-                    console.error('音频播放失败:', error);
-                });
-            }, 1300); // 延迟 1500 毫秒 (1.5 秒)
-        
-            // 从购物车中移除已购买的产品
-            removePurchasedProducts(products);
-        
-            // 清空购物车并更新 localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-            displayCart(); // 更新页面上的购物车显示
-            checkLoginStatus();
-        
-            // 等待 3 秒后跳转页面
-            setTimeout(() => {
-                window.location.href = 'Purchase';
-            }, 3000);
-        } else {
-            // 显示付款失败动画
-            paymentResult.style.display = 'block';
-            successfulPay.style.display = 'none';
-            unsuccessfulPay.style.display = 'block';
-        }
-    } catch (error) {
-        alert(`付款失败，${error.message}`);
-    
-        // 显示付款失败动画
-        const paymentResult = document.getElementById('paymentResult');
-        const successfulPay = document.getElementById('successfulPay');
-        const unsuccessfulPay = document.getElementById('UnsuccessfulPay');
-    
-        paymentResult.style.display = 'block';
-        successfulPay.style.display = 'none';
-        unsuccessfulPay.style.display = 'block';
-    }
-    
-    // 处理完成后恢复按钮状态
-    resetCheckoutButton();
-    
-});
-
-// 获取选中的产品
-function getSelectedProducts() {
     const checkboxes = document.querySelectorAll('.product-checkbox');
+    const username = localStorage.getItem('username'); // 从 LocalStorage 获取用户名
     const selectedProducts = [];
+
+    // 获取选中的产品名称
     checkboxes.forEach((checkbox, index) => {
         if (checkbox.checked) {
-            const product = cart[index];
-            selectedProducts.push({
-                name: product[0],       // 产品名称
-                category: product[1],
-                price: product[2],      // 产品价格
-                image: product[3],      // 产品图片
-            });
+            selectedProducts.push(cart[index][0]); // 产品名称是 cart[index][0]
         }
     });
-    return selectedProducts;
-}
 
-// 保存购买记录到 Google Sheets，并更新余额
-async function savePurchaseLog(purchaseLog, username, newWalletAmount) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwBq_PRRe1qhdQuxdD4SRY8MQhhiAl90fLCETsnBJyaTboG3QBS-XbE0u6JZwi1Pi04/exec'; // 替换为您的 Google Apps Script 部署 URL
-    const response = await fetch(`${scriptURL}?action=savePurchaseLog`, {
-        method: 'POST',
-        body: JSON.stringify(purchaseLog)
-    });
-
-    // 更新余额到 Google Sheets 的 Users 页面
-    const updateBalanceResponse = await updateUserBalance(username, newWalletAmount);
-    if (!updateBalanceResponse.success) {
-        alert('付款失败，请稍后再试。');
+    if (selectedProducts.length === 0) {
+        alert('请选择至少一个产品进行结账！');
+        return;
     }
 
-    return response.json();
-}
+    // 显示支付处理中的提示
+    document.getElementById('paymentResult').style.display = 'block';
+    document.getElementById('productLoading').style.display = 'block';
+    document.getElementById('successfulPay').style.display = 'none';
+    document.getElementById('UnsuccessfulPay').style.display = 'none';
 
-// 更新用户余额到 Google Sheets
-async function updateUserBalance(username, newBalance) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwdRGV1AiJd2mvIFZOBoyjn77Boild8arwCH0JAzFqB3lCCaaKkYffsOeRB3AO7FnaF/exec'; // 替换为您的 Google Apps Script 部署 URL
-    const response = await fetch(`${scriptURL}?action=updateBalance`, {
-        method: 'POST',
-        body: JSON.stringify({ username, newBalance })
-    });
-    return response.json();
-}
+    // 构造数据
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('products', JSON.stringify(selectedProducts)); // 将产品名称数组序列化为字符串
 
-// 从购物车中移除已购买的产品
-function removePurchasedProducts(selectedProducts) {
-    selectedProducts.forEach(selectedProduct => {
-        deleteProduct(selectedProduct);  // 删除每个选中的产品
-    });
+    try {
+        const response = await fetch(
+            'https://script.google.com/macros/s/AKfycbyunBpZ2XbMg_4fRDSp9IqtyYlXopfx-WfEO0zZKTWNH5RewpQKdmHbqJYU5Se0W99_/exec?action=proccessPurchase', // 替换为你的Google Apps Script网址
+            {
+                method: 'POST',
+                body: formData,
+            }
+        );
 
-    // 购物车已更新，重新保存到 localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));  // 确保购物车更新到 localStorage
+        const result = await response.json();
+        if (result.success) {
+            // 结账成功
+            document.getElementById('successfulPay').style.display = 'block';
+            document.getElementById('productLoading').style.display = 'none';
+            document.getElementById('UnsuccessfulPay').style.display = 'none';
 
-    // 刷新购物车显示
-    displayCart();
-}
+            // 在 1.3 秒后播放音频
+            setTimeout(() => {
+                const audio = new Audio('Element/applepay.mp3');
+                audio.play();
 
-// 检查购物车并更新按钮状态
-function updateCheckoutButtonState() {
-    const checkoutButton = document.getElementById('checkoutButton');
-    const selectedProducts = getSelectedProducts();
-    checkoutButton.disabled = selectedProducts.length === 0;
-}
+                // 等待音频播放结束后，再等待 3 秒后跳转
+                audio.onended = () => {
+                    setTimeout(() => {
+                        window.location.href = 'Purchase'; // 跳转到 Purchase 页面
+                    }, 2000); // 等待 2 秒
+                };
+            }, 1300);
 
-// 恢复结账按钮的初始状态
-function resetCheckoutButton() {
-    const checkoutButton = document.getElementById('checkoutButton');
-    checkoutButton.disabled = false;
-    checkoutButton.textContent = '结账';
-}
+            // 更新 LocalStorage 中的 walletAmount
+            localStorage.setItem('walletAmount', result.balanceAfter);
 
+            // 清空购物车并更新显示
+            cart = cart.filter(product => !selectedProducts.includes(product[0]));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            checkLoginStatus(); // 如果需要更新登录状态
+        } else {
+            document.getElementById('UnsuccessfulPay').style.display = 'none';
+            alert(result.message || '结账失败！请稍后重试。');
+            document.getElementById('paymentResult').style.display = 'none';
+            document.getElementById('productLoading').style.display = 'none';
+        }
+    } catch (error) {
+        console.error('结账失败:', error);
+        alert('网络错误，请稍后重试！');
+        document.getElementById('paymentResult').style.display = 'none';
+        document.getElementById('UnsuccessfulPay').style.display = 'none';
+        document.getElementById('productLoading').style.display = 'none';
+    }
+});
 
-// 页面加载时显示购物车内容
 window.onload = function() {
     checkLoginStatus();
     displayCart()
-    updateCheckoutButtonState();
 };
