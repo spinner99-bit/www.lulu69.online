@@ -46,8 +46,14 @@ async function checkLoginStatus() {
             <div class="welcome-message">${number}</div>
         </div>
         <div class="header-balance">
-            <img src="Element/Icon/Coin.webp">
-            <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
+            <div>
+                <img src="Element/Icon/Coin.webp">
+                <i class='bx bx-loader-circle'></i>
+            </div>
+            <a class="header-csCover" href="https://t.me/lulu69_mega">
+                <i class="fa-solid fa-headset"></i>
+                <p>客服</p>
+            </a>
         </div>
       `;
   
@@ -66,6 +72,10 @@ async function checkLoginStatus() {
       balanceDiv.innerHTML = `
         <img src="Element/Icon/Coin.webp">
         <div class="welcome-message">${headerBalance}</div>
+        <a class="header-csCover" href="https://t.me/lulu69_mega">
+            <i class="fa-solid fa-headset"></i>
+            <p>客服</p>
+        </a>
       `;
     }
   }
