@@ -19,33 +19,43 @@ async function checkLoginStatus() {
   } else {
     // 如果已登录，显示欢迎信息和加载状态
     headerDiv.innerHTML = `
-      <div class="header-userInfo">
-          <i class="fa-solid fa-user"></i>
-          <div class="welcome-message">${number}</div>
-      </div>
-      <div class="header-balance">
-          <img src="Element/Icon/Coin.webp">
-          <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
-      </div>
-    `;
+    <div class="header-userInfo">
+        <i class="fa-solid fa-user"></i>
+        <div class="welcome-message">${number}</div>
+    </div>
+    <div class="header-balance">
+        <div>
+            <img src="Element/Icon/Coin.webp">
+            <i class='bx bx-loader-circle'></i>
+        </div>
+        <a class="header-csCover" href="https://t.me/lulu69_mega">
+            <i class="fa-solid fa-headset"></i>
+            <p>客服</p>
+        </a>
+    </div>
+  `;
 
-    // 获取并更新钱包金额
-    await fetchWalletAmount(); // 调用更新钱包余额的方法
+  // 获取并更新钱包金额
+  await fetchWalletAmount(); // 调用更新钱包余额的方法
 
-    // 从 localStorage 获取更新后的钱包金额
-    const updatedWalletAmount = localStorage.getItem('walletAmount');
+  // 从 localStorage 获取更新后的钱包金额
+  const updatedWalletAmount = localStorage.getItem('walletAmount');
 
-    // 格式化钱包金额
-    const formattedWalletAmount = formatWalletAmount(updatedWalletAmount);
+  // 格式化钱包金额
+  const formattedWalletAmount = formatWalletAmount(updatedWalletAmount);
 
-    // 更新 header-balance 内容
-    const headerBalance = `${formattedWalletAmount}`;
-    const balanceDiv = document.querySelector('.header-balance');
-    balanceDiv.innerHTML = `
-      <img src="Element/Icon/Coin.webp">
-      <div class="welcome-message">${headerBalance}</div>
-    `;
-  }
+  // 更新 header-balance 内容
+  const headerBalance = `${formattedWalletAmount}`;
+  const balanceDiv = document.querySelector('.header-balance');
+  balanceDiv.innerHTML = `
+    <img src="Element/Icon/Coin.webp">
+    <div class="welcome-message">${headerBalance}</div>
+    <a class="header-csCover" href="https://t.me/lulu69_mega">
+        <i class="fa-solid fa-headset"></i>
+        <p>客服</p>
+    </a>
+  `;
+}
 }
 
 // 调用 Google Apps Script 获取钱包余额
