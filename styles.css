@@ -168,10 +168,35 @@ header span{
 }
 
 .header-balance .bx-loader-circle{
-    margin-left: 5px;
+    margin: 0 5px;
     -webkit-animation: spin 1.5s linear infinite;
 	-moz-animation: spin 1.5s linear infinite;
 	animation: spin 1.5s linear infinite;
+}
+
+.header-csCover{
+    margin-left: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    border-left: 3px solid white;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.header-csCover .fa-headset{
+    font-size: 20px;
+    align-self: center;
+}
+
+.header-csCover p{
+    margin-left: 5px;
+}
+
+.header-csCover:hover{
+    color: yellow;
 }
 
 @media (max-width: 768px) {
