@@ -563,7 +563,7 @@ footer {
 }
 
 .home-productCategory{
-    font-size: smaller;
+    font-size: x-small;
     text-align: center;
     font-weight: 900;
     padding: 5px 0;
@@ -983,4 +983,61 @@ footer {
     .checkout-button {
         padding: 10px 30px;
     }
+}
+
+.userInfo-wrapper {
+    width: 100%;
+    background-color: #aa0808;
+    border-bottom: 3px solid #fbbc04;
+}
+
+.topDetails {
+    display: flex; /* 启用 flex 布局 */
+    align-items: center;
+}
+
+.leftImg-Detail {
+    flex-shrink: 0;
+    padding: 10px 20px;
+}
+
+.leftImg-Detail img {
+    width: auto;
+    height: 80px;
+}
+
+.namePhone-Details {
+    flex-grow: 1; /* 占据剩余空间 */
+    text-align: center;
+    padding: 10px; /* 可选：增加内边距 */
+    box-sizing: border-box; /* 确保 padding 不影响宽度 */
+    color: white;
+}
+
+.fullName-Details{
+    font-size: medium;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.phone-Details{
+    display: flex;
+    font-size: smaller;
+    font-weight: 900;
+}
+
+.username-Details{
+    display: flex;
+    font-size: x-small;
+    font-weight: 900;
+    margin: 5px 0;
+}
+
+.boxLabel{
+    width: 100%;
+    background-color: white;
+    padding: 10px 20px;
+    margin-top: 15px;
+    display: flex;
+    font-weight: 900;
 }
