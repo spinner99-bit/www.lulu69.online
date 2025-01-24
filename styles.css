@@ -1007,26 +1007,27 @@ footer {
     border-bottom: 3px solid #fbbc04;
 }
 
-.topDetails {
+.userInfo-wrapper .topDetails {
     display: flex; /* 启用 flex 布局 */
     align-items: center;
 }
 
 .leftImg-Detail {
     flex-shrink: 0;
-    padding: 10px 20px;
+    padding: 10px 10px 10px 20px;
 }
 
 .leftImg-Detail img {
     width: auto;
-    height: 80px;
+    height: 100px;
+    object-fit: contain;
 }
 
 .namePhone-Details {
-    flex-grow: 1; /* 占据剩余空间 */
+    flex-grow: 1;
     text-align: center;
-    padding: 10px; /* 可选：增加内边距 */
-    box-sizing: border-box; /* 确保 padding 不影响宽度 */
+    padding: 0 10px;
+    box-sizing: border-box;
     color: white;
 }
 
