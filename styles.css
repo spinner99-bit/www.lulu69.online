@@ -150,6 +150,7 @@ header{
     color: gold;
 }
 
+.header-userInfo img,
 .header-balance img{
     height: 22px;
     width: auto;
@@ -224,23 +225,38 @@ footer {
  /* Styling each navigation item */
 .bottom-nav a {
     text-align: center;
+    align-items: center;
     text-decoration: none;
     font-size: 12px;
     flex: 1;
+    justify-content: center;
     padding: 5px 0;
 }
 
-.menuPage-normal{
+.pageMenu-Unactive{
+    background-color: red;
     color: white;
 }
 
-.menuPage-setYellow{
+.pageMenu-Active{
     background-color: white;
     color: red;
 }
 
-.bottom-nav a .icon {
-    font-size: 26px;
+.imgIcon-wrapper{
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    justify-self: center;
+}
+
+.imgIcon-wrapper img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 图片自适应，保持完整性 */
+}
+
+.bottom-nav span{
     display: block;
 }
 
