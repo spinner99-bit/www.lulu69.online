@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const productCardsContainer = document.getElementById("productCards");
   const productLoading = document.getElementById("productLoading");
   const username = localStorage.getItem("username");
+  const myDataCount = document.getElementById("myDataCount");
 
   // 如果用户未登录，跳转到登录页面
   if (!username) {
@@ -167,13 +168,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await response.json();
 
       if (data.success && data.records.length > 0) {
+          const records = data.records;
+
           displayProducts(data.records);
+          myDataCount.textContent = records.length;
       } else {
           productCardsContainer.innerHTML = "<p>暂无购买记录。</p>";
+          myDataCount.textContent = 0; // 如果没有记录，显示 0
       }
   } catch (error) {
       console.error("获取购买记录失败：", error);
       productCardsContainer.innerHTML = "<p>无法加载购买记录，请稍后再试。</p>";
+      myDataCount.textContent = 0;
   } finally {
       // 隐藏加载动画
       productLoading.style.display = "none";
@@ -292,9 +298,22 @@ function hidePopup() {
   }
 }
 
+function displayUserInfo() {
+  // 从 localStorage 获取值
+  const fullName = localStorage.getItem('fullName') || 'No Full Name';
+  const wanumber = localStorage.getItem('wanumber') || 'No Phone';
+  const username = localStorage.getItem('username') || 'No Username';
+
+  // 将值显示到对应的 HTML 元素
+  document.getElementById('fullName-Details').textContent = fullName;
+  document.getElementById('phone-Details').textContent = wanumber;
+  document.getElementById('username-Details').textContent = username;
+}
+
 
 // 页面加载时
 window.onload = function() {
   checkLoginStatus();
   updateCartCount();
+  displayUserInfo()
 };
