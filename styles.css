@@ -151,10 +151,12 @@ header{
 }
 
 .header-userInfo img,
-.header-balance img{
+.header-balance img,
+.cartList-BackIcon img{
     height: 22px;
     width: auto;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .fa-arrow-left{
