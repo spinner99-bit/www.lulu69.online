@@ -206,7 +206,6 @@ header span{
     }
 }
 
-/* Container for the bottom navigation */
 footer {
     position: fixed;
     bottom: 0;
@@ -222,14 +221,15 @@ footer {
     justify-content: space-around;
 }
 
- /* Styling each navigation item */
-.bottom-nav a {
-    text-align: center;
+ .bottom-nav a {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
     font-size: 12px;
+    line-height: 1.5;
     flex: 1;
-    justify-content: center;
     padding: 5px 0;
 }
 
@@ -247,7 +247,9 @@ footer {
     width: 40px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    justify-self: center;
+    display: flex; /* 确保图标容器内的图标也能正确对齐 */
+    justify-content: center;
+    align-items: center;
 }
 
 .imgIcon-wrapper img{
@@ -257,7 +259,9 @@ footer {
 }
 
 .bottom-nav span{
+    margin-top: 5px; /* 给文本增加间距 */
     display: block;
+    text-align: center;
 }
 
 .bottom-copyRight {
