@@ -169,13 +169,14 @@ const productDataUrl = 'https://script.google.com/macros/s/AKfycbwWB9lrviSo_w4Eu
 const purchaseLogUrl = 'https://script.google.com/macros/s/AKfycbx7UJW9iZGwLvghAIGvguZk2ZlUDSNssv-0pBibk7fappjtgZrI_mwLCGcMg7Gp7lnH/exec'; // 替换为实际部署的 URL
 
 // Global variables to store categories and products
-let categories = [];
-let allProducts = [];
+let categories = JSON.parse(localStorage.getItem('categories')) || [];
+let allProducts = JSON.parse(localStorage.getItem('allProducts')) || [];
 let purchasedProducts = []; // 存储用户已购买的产品
-let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || []; // 从 localStorage 加载购物车数据
+let isFetchingCategories = false;
+let isFetchingProducts = false;
 
-const username = localStorage.getItem('username'); // 从 localStorage 获取用户名
-
+const username = localStorage.getItem('username'); // 获取用户名
 
 // 如果用户名存在，调用 fetchPurchasedProducts
 if (username) {
@@ -184,39 +185,66 @@ if (username) {
     console.warn('Username not found in localStorage');
 }
 
+// 检查本地缓存是否有 categories 和 products
+if (categories.length > 0 && allProducts.length > 0) {
+    console.log('Using cached categories and products');
+    displayCategories(categories);
+} else {
+    console.log('Fetching new categories and products');
+    fetchCategories(); // 如果没有缓存数据，则从服务器请求
+}
+
+const cacheTime = localStorage.getItem('cacheTime');
+const cacheDuration = 1000 * 60 * 10; // 10 分钟缓存时间
+
+if (!cacheTime || Date.now() - cacheTime > cacheDuration) {
+    fetchCategories(); // 重新请求数据
+} else {
+    console.log('Using cached data');
+    displayCategories(categories);
+}
+
+// 获取分类数据
 async function fetchCategories() {
+    if (isFetchingCategories) return; // 避免重复调用
+    isFetchingCategories = true;
+
     try {
         const response = await fetch(categoryDataUrl);
         const data = await response.json();
         if (data && data.options) {
-            categories = data.options;  // Categories are in "options" array
+            categories = data.options;  
+            localStorage.setItem('categories', JSON.stringify(categories));
 
-            // Ensure that categories are fetched before calling displayCategories
-            await fetchProducts(); // Wait for products to load before calling displayCategories
+            await fetchProducts();
         } else {
             console.error('Categories data is missing or incorrectly formatted');
         }
     } catch (error) {
         console.error('Error fetching categories:', error);
+    } finally {
+        isFetchingCategories = false;
     }
 }
 
+// 获取产品数据
 async function fetchProducts() {
-    try {
-        productLoading.style.display = 'block'; // 显示加载动画
+    if (isFetchingProducts) return;
+    isFetchingProducts = true;
 
+    try {
         const response = await fetch(productDataUrl);
         const data = await response.json();
         if (data && data.data) {
-            allProducts = data.data;  // Products are in "data" array
-
-            // Now call displayCategories with the loaded categories and allProducts
-            displayCategories(categories); // Display categories once all products are loaded
+            allProducts = data.data;
+            localStorage.setItem('allProducts', JSON.stringify(allProducts));
         } else {
             console.error('Products data is missing or incorrectly formatted');
         }
     } catch (error) {
         console.error('Error fetching products:', error);
+    } finally {
+        isFetchingProducts = false;
     }
 }
 
@@ -227,10 +255,6 @@ async function fetchPurchasedProducts(username) {
         const data = await response.json();
         if (data.success && data.records) {
             purchasedProducts = data.records.map(record => record[0]); // 假设产品名称在第一列
-
-            // 打印返回的所有数据和已购买的产品列表
-            // console.log('Fetched data:', data);
-            // console.log('Purchased products:', purchasedProducts);
         } else {
             console.warn('No purchased products found.');
         }
@@ -239,7 +263,7 @@ async function fetchPurchasedProducts(username) {
     }
 }
 
-
+// 监听类别切换事件
 document.getElementById('categoryContainer').addEventListener('change', (event) => {
     const selectedCategory = event.target.value;
     if (selectedCategory === '全部') {
@@ -302,7 +326,7 @@ async function displayProducts(products) {
     productLoading.style.display = 'block';
 
     productContainer.innerHTML = ''; // 清空现有内容
-
+ 
     // 模拟产品加载（假设是异步操作，实际情况下可以是从API获取数据）
     setTimeout(() => {
         // 当所有产品加载完成，隐藏加载动画
