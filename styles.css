@@ -509,12 +509,20 @@ footer {
 
 .home-product-select select{
     text-align: center;
-    border: 1px solid red;
+    appearance: none; /* 移除默认样式 */
+    text-align-last: center; /* 兼容某些浏览器 */
+    border: 1px solid #ffe4a3;
+    border-radius: 10px;
     padding: 5px 10px;
     font-weight: 900;
-    background-color: transparent;
-    color: red;
+    background: linear-gradient(to bottom, #fb908a, red);
+    color: white;
     font-size: medium;
+}
+
+.home-product-select option{
+    background: white;
+    color: black;
 }
 
 .home-product-wrapper{
