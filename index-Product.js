@@ -185,38 +185,34 @@ if (username) {
     console.warn('Username not found in localStorage');
 }
 
-// 检查本地缓存是否有 categories 和 products
-if (categories.length > 0 && allProducts.length > 0) {
-    console.log('Using cached categories and products');
-    displayCategories(categories);
-} else {
-    console.log('Fetching new categories and products');
-    fetchCategories(); // 如果没有缓存数据，则从服务器请求
-}
-
 const cacheTime = localStorage.getItem('cacheTime');
-const cacheDuration = 1000 * 60 * 10; // 10 分钟缓存时间
+const cacheDuration = 1000 * 60 * 60 * 4; // 4 小时缓存时间
+const isCacheExpired = !cacheTime || Date.now() - cacheTime > cacheDuration;
 
-if (!cacheTime || Date.now() - cacheTime > cacheDuration) {
-    fetchCategories(); // 重新请求数据
+if (isCacheExpired) {
+    console.log('Cache expired or not found. Fetching new data...');
+    fetchCategories(); // 重新获取类别
+    localStorage.setItem('cacheTime', Date.now()); // 更新缓存时间
 } else {
-    console.log('Using cached data');
+    console.log('Using cached categories and products');
     displayCategories(categories);
 }
 
 // 获取分类数据
 async function fetchCategories() {
-    if (isFetchingCategories) return; // 避免重复调用
+    if (isFetchingCategories) return;
     isFetchingCategories = true;
 
     try {
         const response = await fetch(categoryDataUrl);
         const data = await response.json();
         if (data && data.options) {
-            categories = data.options;  
+            categories = data.options;
             localStorage.setItem('categories', JSON.stringify(categories));
 
+            // 确保获取产品数据后再显示类别
             await fetchProducts();
+            displayCategories(categories); // 这里调用
         } else {
             console.error('Categories data is missing or incorrectly formatted');
         }
@@ -263,17 +259,7 @@ async function fetchPurchasedProducts(username) {
     }
 }
 
-// 监听类别切换事件
-document.getElementById('categoryContainer').addEventListener('change', (event) => {
-    const selectedCategory = event.target.value;
-    if (selectedCategory === '全部') {
-        displayProducts(allProducts); // 如果选择的是全部，显示所有产品
-    } else {
-        filterProductsByCategory(selectedCategory);
-    }
-});
-
-function displayCategories(categories) {
+async function displayCategories(categories) {
     const categoryContainer = document.getElementById('categoryContainer');
     categoryContainer.innerHTML = '';
 
@@ -303,21 +289,6 @@ function displayCategories(categories) {
     displayProducts(allProducts); // 默认显示所有产品
 }
 
-// 根据选定的分类过滤产品
-function filterProductsByCategory(selectedCategory) {
-    if (selectedCategory === '全部') {
-        displayProducts(allProducts);
-        return;
-    }
-
-    const normalizedCategory = selectedCategory.toLowerCase();
-    const filteredProducts = allProducts.filter(product => 
-        product[1].some(cat => cat.toLowerCase() === normalizedCategory)
-    );
-
-    displayProducts(filteredProducts);
-}
-
 async function displayProducts(products) {
     const productContainer = document.getElementById('productContainer');
     const productLoading = document.getElementById('productLoading'); // 获取加载图标
@@ -333,7 +304,7 @@ async function displayProducts(products) {
         productLoading.style.display = 'none';
 
         if (products.length === 0) {
-            productContainer.innerHTML = '<p>No products found.</p>';
+            productContainer.innerHTML = '<p>努力加载资源中...</p>';
         } else {
             products.forEach(product => {
                 const [name, categories, price, image, status, date] = product;
@@ -424,7 +395,32 @@ async function displayProducts(products) {
                 productContainer.appendChild(productCard);
             });
         }
-    }, 500); // 模拟延迟
+    }, ); // 模拟延迟
+}
+
+// 监听类别切换事件
+document.getElementById('categoryContainer').addEventListener('change', (event) => {
+    const selectedCategory = event.target.value;
+    if (selectedCategory === '全部') {
+        displayProducts(allProducts); // 如果选择的是全部，显示所有产品
+    } else {
+        filterProductsByCategory(selectedCategory);
+    }
+});
+
+// 根据选定的分类过滤产品
+function filterProductsByCategory(selectedCategory) {
+    if (selectedCategory === '全部') {
+        displayProducts(allProducts);
+        return;
+    }
+
+    const normalizedCategory = selectedCategory.toLowerCase();
+    const filteredProducts = allProducts.filter(product => 
+        product[1].some(cat => cat.toLowerCase() === normalizedCategory)
+    );
+
+    displayProducts(filteredProducts);
 }
 
 // 确保用户已登录后才执行某些操作
@@ -641,7 +637,5 @@ document.addEventListener('DOMContentLoaded', () => {
 // 页面加载时
 window.onload = function() {
     checkLoginStatus();
-    fetchCategories();
-    fetchProducts();
     updateCartCount();
 };
