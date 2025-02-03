@@ -178,11 +178,12 @@ let isFetchingProducts = false;
 
 const username = localStorage.getItem('username'); // 获取用户名
 
-// 如果用户名存在，调用 fetchPurchasedProducts
-if (username) {
-    fetchPurchasedProducts(username);
-} else {
-    console.warn('Username not found in localStorage');
+function refeshPurchasedProduct(){
+    if (username) {
+        fetchPurchasedProducts(username);
+    } else {
+        console.warn('Username not found in localStorage');
+    }
 }
 
 const cacheTime = localStorage.getItem('cacheTime');
@@ -192,9 +193,11 @@ const isCacheExpired = !cacheTime || Date.now() - cacheTime > cacheDuration;
 if (isCacheExpired) {
     console.log('Cache expired or not found. Fetching new data...');
     fetchCategories(); // 重新获取类别
+    fetchAndDisplayProducts()
     localStorage.setItem('cacheTime', Date.now()); // 更新缓存时间
 } else {
     console.log('Using cached categories and products');
+    fetchAndDisplayProducts()
     displayCategories(categories);
 }
 
@@ -249,14 +252,25 @@ async function fetchPurchasedProducts(username) {
     try {
         const response = await fetch(`${purchaseLogUrl}?action=getPurchaseLog&username=${username}`);
         const data = await response.json();
+        localStorage.setItem('purchaseProduct', JSON.stringify(data));
         if (data.success && data.records) {
             purchasedProducts = data.records.map(record => record[0]); // 假设产品名称在第一列
         } else {
-            console.warn('No purchased products found.');
+            console.warn('No purchased record found.');
         }
     } catch (error) {
         console.error('Error fetching purchased products:', error);
     }
+}
+
+// 确保用户已登录后才执行某些操作
+async function fetchAndDisplayProducts() {
+    const username = localStorage.getItem('username');
+    if (username) {
+        // 获取已购买的产品
+        fetchPurchasedProducts(username);
+    }
+    await fetchCategories();
 }
 
 async function displayCategories(categories) {
@@ -421,16 +435,6 @@ function filterProductsByCategory(selectedCategory) {
     );
 
     displayProducts(filteredProducts);
-}
-
-// 确保用户已登录后才执行某些操作
-async function fetchAndDisplayProducts() {
-    const username = localStorage.getItem('username');
-    if (username) {
-        // 获取已购买的产品
-        await fetchPurchasedProducts(username);
-    }
-    await fetchCategories();
 }
 
 // 弹出窗口显示图片的功能
@@ -638,4 +642,5 @@ document.addEventListener('DOMContentLoaded', () => {
 window.onload = function() {
     checkLoginStatus();
     updateCartCount();
+    fetchAndDisplayProducts();
 };
