@@ -34,7 +34,7 @@ async function submitRegister(event) {
   let wanumber = document.getElementById('registerWaNumber').value.trim();
 
   // 自动生成 Username
-  const username = 'L69' + (Math.floor(Date.now() / 1000) % 10000) + Math.floor(Math.random() * 100);
+  // const username = 'L69' + (Math.floor(Date.now() / 1000) % 10000) + Math.floor(Math.random() * 100);
 
   // 输入长度验证
   if (password.length < 4) {
