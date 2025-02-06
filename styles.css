@@ -37,10 +37,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: url(Element/Background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(45deg, #ff758c, #ff2e63, #800080);
     height: 100%;
     overflow: hidden;
 }
@@ -52,10 +49,10 @@ body::-webkit-scrollbar-thumb {
     max-width: 500px;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
-    background: transparent;
+    background: linear-gradient(to bottom, #fb908a, red);
     backdrop-filter: blur(5px);
     border-radius: 20px;
-    border: 2px solid black;
+    border: 3px solid white;
 }
 
 @media (max-width: 768px) {
@@ -64,8 +61,16 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
+.loginContainer-wrapper img{
+    width: 250px;
+    height: auto;
+    justify-self: center;
+    padding: 10px 0;
+}
+
 .loginFormContainer input,
-.loginSubmitBtn{
+.loginSubmitBtn,
+.registerSubmitBtn{
     border-radius: 20px;
     width: 100%;
 }
@@ -84,12 +89,13 @@ body::-webkit-scrollbar-thumb {
     color: rgb(87, 87, 87);
 }
 
-.loginSubmitBtn{
+.loginSubmitBtn,
+.registerSubmitBtn{
     padding: 10px;
     margin-top: 10px;
     font-size: 20px;
     color: white;
-    background-color: red;
+    background: linear-gradient(to bottom, #fb908a, red);
     border: 2px solid white;
     cursor: pointer;
 }
@@ -107,8 +113,8 @@ body::-webkit-scrollbar-thumb {
     background: transparent;
     border: none;
     font-size: 17px;
-    color: red;
-    border-bottom: 2px solid red;
+    color: white;
+    border-bottom: 2px solid white;
     text-decoration: none;
     cursor: pointer;
 }
