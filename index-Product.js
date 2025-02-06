@@ -41,18 +41,21 @@ async function checkLoginStatus() {
     } else {
       // 如果已登录，显示欢迎信息和加载状态
       headerDiv.innerHTML = `
-        <div class="header-userInfo">
-            <img src="Element/Element/ID-Card.png">
-            <div class="welcome-message">${number}</div>
+        <div class="headerLeft-Logo">
+            <img src="Element/Element/LOGO-2.png">
         </div>
-        <div class="header-balance">
-            <div>
+        <div class="headerRight-cover">
+            <div class="header-balance">
                 <img src="Element/Icon/Coin.webp">
                 <i class='bx bx-loader-circle'></i>
             </div>
-            <a class="header-csCover" href="https://t.me/lulu69_mega">
-                <img scr="Element/Element/Call.png">
-                <p>客服</p>
+            <a class="headerRight-menu" href="/Change-Password">
+                <img src="Element/Element/Gear.png">
+                <p>设置</p>
+            </a>
+            <a class="headerRight-menu" href="/Purchase">
+                <img src="Element/Element/User.png">
+                <p>我的</p>
             </a>
         </div>
       `;
@@ -71,11 +74,7 @@ async function checkLoginStatus() {
       const balanceDiv = document.querySelector('.header-balance');
       balanceDiv.innerHTML = `
         <img src="Element/Icon/Coin.webp">
-        <div class="welcome-message">${headerBalance}</div>
-        <a class="header-csCover" href="https://t.me/lulu69_mega">
-            <i class="fa-solid fa-headset"></i>
-            <p>客服</p>
-        </a>
+        <div class="headerRight-balance">${headerBalance}</div>
       `;
     }
   }
