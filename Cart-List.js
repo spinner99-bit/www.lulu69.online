@@ -22,9 +22,11 @@ async function checkLoginStatus() {
         headerDiv.innerHTML = `
         <div onclick="window.history.back()" class="cartList-BackIcon"><img src="Element/Element/Arrow-Left.png"></div>
         <span>购物车 (${cartCount})</span>
-          <div class="header-balance">
-              <img src="Element/Icon/Coin.webp">
-              <i class='bx bx-loader-circle'></i> <!-- 显示加载图标 -->
+          <div class="headerRight-cover">
+              <div class="header-balance">
+                <img src="Element/Icon/Coin.webp">
+                <i class='bx bx-loader-circle'></i>
+            </div>
           </div>
         `;
     
