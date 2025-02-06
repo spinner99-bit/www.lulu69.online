@@ -6,6 +6,16 @@
     font-family: Arial, sans-serif;
 }
 
+.maintenance{
+    color: red;
+    align-self: center;
+    display: flex;
+    justify-self: center;
+    margin-top: 30px;
+    font-size: medium;
+    font-weight: 900;
+}
+
 body{
     background-color: #f0f0f0;
     margin-bottom: 100px;
@@ -119,15 +129,17 @@ header{
   position: sticky;
   top: 0;
   z-index: 1000;
+  align-items: center;
 }
 
-.header-userInfo{
-    display: flex;
+.headerLeft-Logo{
+    height: 100%;
     align-items: center;
 }
 
-.header-userInfo i{
-    margin-right: 5px;
+.headerLeft-Logo img{
+    width: auto;
+    height: 30px;
 }
 
 .plsLogin-button{
@@ -138,20 +150,13 @@ header{
     background-color: yellow;
 }
 
-.welcome-message{
-    font-size: 16px;
-    font-weight: 900;
-    align-self: center;
-}
-
-.header-balance{
+.headerRight-cover{
     display: flex;
     align-items: center;
     color: gold;
 }
 
-.header-userInfo img,
-.header-balance img,
+.headerRight-cover img,
 .cartList-BackIcon img{
     height: 22px;
     width: auto;
@@ -159,15 +164,10 @@ header{
     cursor: pointer;
 }
 
-.fa-arrow-left{
-    font-weight: 900;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-header span{
-    font-weight: 900;
-    font-size: medium;
+.header-balance {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
 }
 
 .header-balance .bx-loader-circle{
@@ -177,26 +177,61 @@ header span{
 	animation: spin 1.5s linear infinite;
 }
 
-.header-csCover{
-    margin-left: 10px;
-    padding-left: 10px;
+.headerRight-balance{
+    font-size: 16px;
+    font-weight: 900;
+    align-self: center;
+}
+
+header span{
+    font-weight: 900;
+    font-size: medium;
+}
+
+.headerRight-menu {
     display: flex;
     align-items: center;
-    color: white;
+    justify-content: center;
     text-decoration: none;
     border-left: 3px solid white;
+    box-sizing: border-box;
+    padding: 0 5px;
     cursor: pointer;
     font-weight: 900;
 }
 
-.header-csCover .fa-headset{
-    font-size: 20px;
-    align-self: center;
+.headerRight-menu img {
+    margin: 0;
+    width: 18px;
+    height: auto;
 }
 
-.header-csCover p{
-    margin-left: 5px;
+.headerRight-menu p {
+    font-size: x-small;
+    font-weight: 900;
+    margin-left: 3px;
+    padding: 0;
+    color: white;
+    white-space: nowrap;
 }
+
+.header-cartIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-left: 3px solid white;
+    box-sizing: border-box;
+    width: auto;
+    padding: 0 3px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.header-cartIcon img {
+    margin: 0 5px;
+}
+
 
 .header-csCover:hover{
     color: yellow;
@@ -246,7 +281,7 @@ footer {
 }
 
 .imgIcon-wrapper{
-    width: 40px;
+    width: 30px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     display: flex; /* 确保图标容器内的图标也能正确对齐 */
@@ -261,7 +296,6 @@ footer {
 }
 
 .bottom-nav span{
-    margin-top: 5px; /* 给文本增加间距 */
     display: block;
     text-align: center;
 }
@@ -596,7 +630,7 @@ footer {
     font-size: x-small;
     text-align: center;
     font-weight: 900;
-    padding: 5px 0;
+    padding: 2px 0;
     margin-bottom: 5px;
     color: blue;
 }
